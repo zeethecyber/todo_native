@@ -1,11 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View } from "react-native";
+
+import InputForm from "./src/components/InputForm";
+import List from "./src/components/List";
 
 export default function App() {
+  const [list, setList] = useState<string[]>([]);
+
+  const addToList = (value: string) => {
+    setList((prevState) => {
+      return [...prevState, value];
+    });
+  };
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <InputForm addToList={addToList} />
+      <List list={list} />
+      <StatusBar style="light" />
     </View>
   );
 }
@@ -13,8 +25,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#313642",
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
 });
